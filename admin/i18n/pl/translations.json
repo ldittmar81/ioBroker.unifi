@@ -1,0 +1,13 @@
+{
+    "controller_ip": "Унифи-kontroler IP/nazwa hosta",
+    "controller_ip_info": "Adres IP Унифи-kontroler (domyślnie: 127.0.0.1)",
+    "controller_password": "Hasło Унифи-Kontroler ",
+    "controller_password_info": "Hasło Унифи-kontroler",
+    "controller_port": "Унифи-Kontroler Portu",
+    "controller_port_info": "Port Унифи-kontroler (domyślnie: 8443)",
+    "controller_username": "Унифи-Kontroler Login",
+    "controller_username_info": "Nazwa Унифи-kontroler (domyślnie: admin)",
+    "unifi adapter settings": "Ustawienia Karty Sieciowej Унифи ",
+    "update_interval": "Interwał Aktualizacji",
+    "update_interval_info": "Interwał w sekundach, aby sprawdzić, czy aktualizacje (domyślnie: 60 sekund)"
+}

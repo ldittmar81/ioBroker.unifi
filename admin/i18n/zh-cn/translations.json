@@ -1,0 +1,13 @@
+{
+    "controller_ip": "统一控制IP/Hostname",
+    "controller_ip_info": "IP地址的统一控制器(default:127.0.0.1)",
+    "controller_password": "统一控制器的密码",
+    "controller_password_info": "密码的统一控制器",
+    "controller_port": "统一控制器的端口",
+    "controller_port_info": "港口的统一控制器(default:8443)",
+    "controller_username": "统一控制的用户名",
+    "controller_username_info": "用户名的统一控制器(default:admin)",
+    "unifi adapter settings": "该设置适配器",
+    "update_interval": "更新的时间间隔",
+    "update_interval_info": "间隔几秒钟内检查更新的(默认60秒)"
+}

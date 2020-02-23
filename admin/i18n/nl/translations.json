@@ -1,0 +1,13 @@
+{
+    "controller_ip": "UniFi-Controller IP/Hostnaam",
+    "controller_ip_info": "IP-adres van de UniFi-Controller (standaard: 127.0.0.1)",
+    "controller_password": "UniFi-Controller Wachtwoord",
+    "controller_password_info": "Wachtwoord van de UniFi-Controller",
+    "controller_port": "UniFi-Controller Poort",
+    "controller_port_info": "De haven van UniFi-Controller (standaard: 8443)",
+    "controller_username": "UniFi-Controller Gebruikersnaam",
+    "controller_username_info": "Gebruikersnaam van de UniFi-Controller (fabrieksinstelling: admin)",
+    "unifi adapter settings": "UniFi-Adapter Instellingen",
+    "update_interval": "Update-Interval",
+    "update_interval_info": "Interval in seconden ingedrukt om te controleren op updates (standaard: 60 seconden)"
+}

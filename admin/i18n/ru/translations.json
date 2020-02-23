@@ -1,0 +1,13 @@
+{
+    "controller_ip": "Унифи-контроллер IP/имя хоста",
+    "controller_ip_info": "IP-адрес Унифи-контроллер (по умолчанию: 127.0.0.1)",
+    "controller_password": "Пароль Унифи-Контроллер ",
+    "controller_password_info": "Пароль Унифи-контроллер",
+    "controller_port": "Унифи-Контроллер Порт",
+    "controller_port_info": "Порт Унифи-контроллер (по умолчанию: 8443)",
+    "controller_username": "Унифи-Контроллер Логин",
+    "controller_username_info": "Имя Унифи-контроллер (по умолчанию: admin)",
+    "unifi adapter settings": "Параметров Адаптера Унифи ",
+    "update_interval": "Интервал Обновления",
+    "update_interval_info": "Интервал в секундах для проверки для обновления (по умолчанию: 60 секунд)"
+}

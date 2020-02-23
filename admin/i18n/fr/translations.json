@@ -1,0 +1,13 @@
+{
+    "controller_ip": "UniFi-Contrôleur IP/nom d'hôte",
+    "controller_ip_info": "L'adresse IP de l'UniFi-Contrôleur (par défaut: 127.0.0.1)",
+    "controller_password": "UniFi-Contrôleur De Mot De Passe",
+    "controller_password_info": "Mot de passe de l'UniFi-Contrôleur",
+    "controller_port": "UniFi-Contrôleur De Port",
+    "controller_port_info": "Port de UniFi-Contrôleur (par défaut: 8443)",
+    "controller_username": "UniFi-Contrôleur De Nom D'Utilisateur",
+    "controller_username_info": "Nom d'utilisateur de l'UniFi-Contrôleur (par défaut: admin)",
+    "unifi adapter settings": "UniFi Les Paramètres De La Carte",
+    "update_interval": "Intervalle De Mise À Jour",
+    "update_interval_info": "Intervalle (en secondes) pour vérifier les mises à jour (par défaut: 60 secondes)"
+}

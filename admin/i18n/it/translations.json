@@ -1,0 +1,13 @@
+{
+    "controller_ip": "UniFi-Controller IP/Hostname",
+    "controller_ip_info": "L'indirizzo IP di UniFi Controller (default: 127.0.0.1)",
+    "controller_password": "UniFi-Controller Password",
+    "controller_password_info": "Password di UniFi Controller",
+    "controller_port": "UniFi-Porta Del Controller",
+    "controller_port_info": "Porto di UniFi Controller (default: 8443)",
+    "controller_username": "UniFi-Controller Username",
+    "controller_username_info": "Nome dell'UniFi-Controller (default: admin)",
+    "unifi adapter settings": "UniFi Impostazioni Della Scheda Di",
+    "update_interval": "Intervallo Di Aggiornamento",
+    "update_interval_info": "Intervallo di tempo in secondi per controllare la disponibilità di aggiornamenti (default: 60 sec)"
+}
