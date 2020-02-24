@@ -251,7 +251,7 @@ class Unifi extends utils.Adapter {
      * Function to create a state and set its value
      * only if it hasn't been set to this value before
      */
-    createState(name, value, desc) {
+    async createState(name, value, desc) {
 
         if (typeof (desc) === 'undefined')
             desc = name;
@@ -276,7 +276,7 @@ class Unifi extends utils.Adapter {
     /**
      * Function to create a channel
      */
-    createChannel(name, desc) {
+    async createChannel(name, desc) {
 
         if (typeof (desc) === 'undefined') {
             desc = name;
@@ -293,7 +293,7 @@ class Unifi extends utils.Adapter {
      * Function that receives the site info as a JSON data array
      * and parses through it to create all channels+states
      */
-    processSiteInfo(site_data) {
+    async processSiteInfo(site_data) {
 
         // lets store some site information
         for (var i = 0; i < site_data.length; i++)
@@ -337,7 +337,7 @@ class Unifi extends utils.Adapter {
      * Function that receives the client device info as a JSON data array
      * and parses through it to create all channels+states
      */
-    processClientDeviceInfo(sites, clientDevices) {
+    async processClientDeviceInfo(sites, clientDevices) {
 
         // lets store some site information
         for (var i = 0; i < sites.length; i++)
@@ -370,7 +370,7 @@ class Unifi extends utils.Adapter {
      * Function that receives the access device info as a JSON data array
      * and parses through it to create all channels+states
      */
-    processAccessDeviceInfo(sites, accessDevices) {
+    async processAccessDeviceInfo(sites, accessDevices) {
 
         // lets store some site information
         for (var i = 0; i < sites.length; i++)
@@ -424,7 +424,7 @@ class Unifi extends utils.Adapter {
      * Function that receives the site sysinfo as a JSON data array
      * and parses through it to create all channels+states
      */
-    processSiteSysInfo(sites, sysinfo) {
+    async processSiteSysInfo(sites, sysinfo) {
 
         // lets store some site information
         for (var i = 0; i < sysinfo.length; i++)
