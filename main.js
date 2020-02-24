@@ -57,7 +57,7 @@ class Unifi extends utils.Adapter {
         // in this template all states changes inside the adapters namespace are subscribed
         this.subscribeStates('*');
 
-        updateUniFiData();
+        this.updateUniFiData();
     }
 
     /**
@@ -123,7 +123,7 @@ class Unifi extends utils.Adapter {
             }
 
         }
-        updateUniFiData();
+        this.updateUniFiData();
     }
 
     updateUniFiData() {
@@ -164,7 +164,7 @@ class Unifi extends utils.Adapter {
                 this.log.info('getSitesStats: ' + sites);
                 //adapter.log.info(JSON.stringify(site_data));
 
-                processSiteInfo(site_data);
+                this.processSiteInfo(site_data);
 
                 //////////////////////////////
                 // GET SITE SYSINFO
@@ -172,7 +172,7 @@ class Unifi extends utils.Adapter {
                     this.log.info('getSiteSysinfo: ' + sysinfo.length);
                     //adapter.log.info(JSON.stringify(sysinfo));
 
-                    processSiteSysInfo(sites, sysinfo);
+                    this.processSiteSysInfo(sites, sysinfo);
 
                     //////////////////////////////
                     // GET CLIENT DEVICES
@@ -180,7 +180,7 @@ class Unifi extends utils.Adapter {
                         this.log.info('getClientDevices: ' + client_data[0].length);
                         //adapter.log.info(JSON.stringify(client_data));
 
-                        processClientDeviceInfo(sites, client_data);
+                        this.processClientDeviceInfo(sites, client_data);
 
                         //////////////////////////////
                         // GET ACCESS DEVICES
@@ -188,7 +188,7 @@ class Unifi extends utils.Adapter {
                             this.log.info('getAccessDevices: ' + devices_data[0].length);
                             //adapter.log.info(JSON.stringify(devices_data));
 
-                            processAccessDeviceInfo(sites, devices_data);
+                            this.processAccessDeviceInfo(sites, devices_data);
 
                             //////////////////////////////
                             // FINALIZE
@@ -197,10 +197,10 @@ class Unifi extends utils.Adapter {
                             controller.logout();
 
                             // process all schedule state changes
-                            processStateChanges(setStateArray);
+                            this.processStateChanges(setStateArray);
 
-                            // schedule a new execution of updateUniFiData in X seconds
-                            queryTimeout = setTimeout(updateUniFiData, update_interval * 1000);
+                            // schedule a new execution of this.updateUniFiData in X seconds
+                            queryTimeout = setTimeout(this.updateUniFiData, update_interval * 1000);
                         });
                     });
                 });
@@ -215,7 +215,7 @@ class Unifi extends utils.Adapter {
 
         //processRequests(endpoints);
 
-        //queryTimeout = setTimeout(updateUniFiData, update_interval * 1000);
+        //queryTimeout = setTimeout(this.updateUniFiData, update_interval * 1000);
     }
 
     /**
@@ -239,10 +239,10 @@ class Unifi extends utils.Adapter {
                 {
                     //adapter.log.info('changing state ' + newState.name + ' : ' + newState.val);
                     this.setState(newState.name, {ack: true, val: newState.val}, function () {
-                        setTimeout(processStateChanges, 0, setStateArray, callback);
+                        setTimeout(this.processStateChanges, 0, setStateArray, callback);
                     });
                 } else
-                    setTimeout(processStateChanges, 0, setStateArray, callback);
+                    setTimeout(this.processStateChanges, 0, setStateArray, callback);
             });
         }
     }
@@ -268,8 +268,9 @@ class Unifi extends utils.Adapter {
             native: {id: name}
         });
 
-        if (typeof (value) !== 'undefined')
+        if (typeof (value) !== 'undefined') {
             setStateArray.push({name: name, val: value});
+        }
     }
 
     /**
@@ -277,8 +278,9 @@ class Unifi extends utils.Adapter {
      */
     createChannel(name, desc) {
 
-        if (typeof (desc) === 'undefined')
+        if (typeof (desc) === 'undefined') {
             desc = name;
+        }
 
         this.setObjectNotExists(name, {
             type: 'channel',
@@ -304,14 +306,14 @@ class Unifi extends utils.Adapter {
                 if (typeof (value) === 'object')
                 {
                     if (depth == 1)
-                        createChannel(name, 'Site ' + value.desc);
+                        this.createChannel(name, 'Site ' + value.desc);
                     else // depth == 2
                     {
                         // continue the traversal of the object with depth 2
                         traverse(value, name, 2, 2, function (name, value, depth)
                         {
                             //adapter.log.info('_(' + depth + '): ' + name + ' = ' + value + ' type: ' + typeof(value));
-                            createChannel(name);
+                            this.createChannel(name);
 
                             // walk through all sub values on a flat level starting with the
                             // subsystem tree.
@@ -319,14 +321,14 @@ class Unifi extends utils.Adapter {
                             {
                                 //adapter.log.info('__(' + depth + '): ' + name + ' = ' + value + ' type: ' + typeof(value));
                                 if (typeof (value) === 'object')
-                                    createChannel(name, 'Subsystem ' + value.subsystem);
+                                    this.createChannel(name, 'Subsystem ' + value.subsystem);
                                 else
-                                    createState(name, value);
+                                    this.createState(name, value);
                             });
                         });
                     }
                 } else
-                    createState(name, value);
+                    this.createState(name, value);
             });
         }
     }
@@ -353,12 +355,13 @@ class Unifi extends utils.Adapter {
                         //adapter.log.info('_(' + depth + '): ' + name + ' = ' + value + ' type: ' + typeof(value));
 
                         if (depth == 1)
-                            createChannel(name, typeof (value.hostname) !== 'undefined' ? value.hostname : '');
+                            this.createChannel(name, typeof (value.hostname) !== 'undefined' ? value.hostname : '');
                         else
-                            createState(name, value);
+                            this.createState(name, value);
                     });
-                } else
-                    createState(name, value);
+                } else {
+                    this.createState(name, value);
+                }
             });
         }
     }
@@ -384,35 +387,35 @@ class Unifi extends utils.Adapter {
                     {
                         //adapter.log.info('_(' + depth + '): ' + name + ' = ' + value + ' type: ' + typeof(value));
 
-                        if (depth === 1)
-                            createChannel(name, value.model + ' - ' + value.serial);
-                        else if (typeof (value) === 'object' && value !== null)
-                        {
+                        if (depth === 1) {
+                            this.createChannel(name, value.model + ' - ' + value.serial);
+                        } else if (typeof (value) === 'object' && value !== null) {
                             traverse(value, name, 1, 2, function (name, value, depth)
                             {
                                 //adapter.log.info('__(' + depth + '): ' + name + ' = ' + value + ' type: ' + typeof(value) + ' is_null: ' + (value === null));
 
-                                if (depth === 1)
-                                    createChannel(name, name);
-                                else if (typeof (value) === 'object' && value !== null)
-                                {
-                                    traverse(value, name + '.' + value.name, 1, 0, function (name, value, depth)
-                                    {
+                                if (depth === 1) {
+                                    this.createChannel(name, name);
+                                } else if (typeof (value) === 'object' && value !== null) {
+                                    traverse(value, name + '.' + value.name, 1, 0, function (name, value, depth) {
                                         //adapter.log.info('___(' + depth + '): ' + name + ' = ' + value + ' type: ' + typeof(value));
 
                                         if (depth === 1)
-                                            createChannel(name, name);
+                                            this.createChannel(name, name);
                                         else
-                                            createState(name, value);
+                                            this.createState(name, value);
                                     });
-                                } else
-                                    createState(name, value);
+                                } else {
+                                    this.createState(name, value);
+                                }
                             });
-                        } else
-                            createState(name, value);
+                        } else {
+                            this.createState(name, value);
+                        }
                     });
-                } else
-                    createState(name, value);
+                } else {
+                    this.createState(name, value);
+                }
             });
         }
     }
@@ -433,12 +436,11 @@ class Unifi extends utils.Adapter {
 
                 if (typeof (value) === 'object')
                 {
-                    if (depth == 2)
-                        createChannel(name, 'Site Sysinfo');
-                    else if (depth == 3)
-                        createChannel(name);
-                    else
-                    {
+                    if (depth == 2) {
+                        this.createChannel(name, 'Site Sysinfo');
+                    } else if (depth == 3) {
+                        this.createChannel(name);
+                    } else {
                         if (typeof (value.key) !== 'undefined')
                         {
                             // continue the traversal of the object with depth 2
@@ -446,16 +448,19 @@ class Unifi extends utils.Adapter {
                             {
                                 //adapter.log.info('_(' + depth + '): ' + name + ' = ' + value + ' type2: ' + typeof(value) + ' array: ' + Array.isArray(value));
 
-                                if (Array.isArray(value) === false && typeof (value) === 'object')
-                                    createChannel(name, value.name);
-                                else
-                                    createState(name, value);
+                                if (Array.isArray(value) === false && typeof (value) === 'object') {
+                                    this.createChannel(name, value.name);
+                                } else {
+                                    this.createState(name, value);
+                                }
                             });
-                        } else
-                            createState(name, value);
+                        } else {
+                            this.createState(name, value);
+                        }
                     }
-                } else
-                    createState(name, value);
+                } else {
+                    this.createState(name, value);
+                }
             });
         }
     }
