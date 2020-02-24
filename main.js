@@ -126,7 +126,7 @@ class Unifi extends utils.Adapter {
         this.updateUniFiData();
     }
 
-    updateUniFiData() {
+    async updateUniFiData() {
 
         this.log.info('Starting UniFi-Controller query');
 
@@ -223,7 +223,7 @@ class Unifi extends utils.Adapter {
      * the value is really changed and only then actually call setState()
      * to let others listen for changes
      */
-    processStateChanges(stateArray, callback) {
+    async processStateChanges(stateArray, callback) {
         if (!stateArray || stateArray.length === 0)
         {
             if (typeof (callback) === 'function')
